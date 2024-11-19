@@ -18,6 +18,10 @@ export class AppController {
     private readonly appService: AppService,
     @Inject('BYBIT_WEBSOCKET') private readonly bybitWsClient: WebsocketClient,
   ) {
+    this.setupWebsocket();
+  }
+
+  private setupWebsocket() {
     this.bybitWsClient.on('update', (message) => {
       const { data } = message;
       const { orderId, orderStatus } = data[0];
